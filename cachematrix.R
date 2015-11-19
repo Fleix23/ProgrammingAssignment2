@@ -9,8 +9,11 @@
 makeCacheMatrix <- function(x = numeric()) {
         inv <- NULL
         setMatrix <- function(y) {
-                x <<- y
-                inv <<- NULL # reset inv as the matrix has changed
+                if(!identical(x,y)) { # only reset if the new matrix is different
+                        x <<- y
+                        inv <<- NULL # reset inv as the matrix has changed
+                }
+                else {message("new matrix identical to old, keeping cached data")}
         }
         getMatrix <- function() x
         setinv <- function(inverse) inv <<- inverse
